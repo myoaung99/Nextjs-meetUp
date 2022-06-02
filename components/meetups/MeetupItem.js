@@ -1,7 +1,9 @@
-import Card from '../ui/Card';
-import classes from './MeetupItem.module.css';
+import Card from "../ui/Card";
+import classes from "./MeetupItem.module.css";
+import Link from "next/link";
 
 function MeetupItem(props) {
+  const linkHref = `/${props.id}`;
   return (
     <li className={classes.item}>
       <Card>
@@ -13,7 +15,9 @@ function MeetupItem(props) {
           <address>{props.address}</address>
         </div>
         <div className={classes.actions}>
-          <button>Show Details</button>
+          <Link href={linkHref}>
+            <button>Show Details</button>
+          </Link>
         </div>
       </Card>
     </li>
