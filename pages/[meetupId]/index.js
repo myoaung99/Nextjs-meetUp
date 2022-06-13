@@ -1,15 +1,60 @@
 import React from "react";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
+import {
+  getAllDocument,
+  getSelectedMeetUp,
+  connectDataBase,
+} from "../../helper/api-util";
 
-const MeetUpDetail = () => {
+const MeetUpDetail = (props) => {
+  const { meetup } = props;
   return (
     <MeetupDetail
-      image="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Palace_of_Westminster_from_the_dome_on_Methodist_Central_Hall_%28cropped%29.jpg/1920px-Palace_of_Westminster_from_the_dome_on_Methodist_Central_Hall_%28cropped%29.jpg"
-      title="First meetup"
-      address="Some street, some city"
-      description="This is first meetup"
+      image={meetup.image}
+      title={meetup.title}
+      address={meetup.address}
+      description={meetup.description}
     />
   );
+};
+
+export const getStaticPaths = async () => {
+  const client = await connectDataBase();
+  const allMeetUps = await getAllDocument(client);
+
+  console.log(allMeetUps);
+
+  const paths = allMeetUps.map((meetup) => {
+    return {
+      params: {
+        meetupId: meetup.id,
+      },
+    };
+  });
+
+  client.close();
+
+  return {
+    fallback: false,
+    paths,
+  };
+};
+
+export const getStaticProps = async (context) => {
+  const { meetupId } = context.params;
+  const client = await connectDataBase();
+
+  const allMeetUps = await getAllDocument(client);
+
+  const meetup = await getSelectedMeetUp(allMeetUps, meetupId);
+
+  client.close();
+
+  return {
+    props: {
+      meetup,
+    },
+  };
 };
 
 export default MeetUpDetail;
