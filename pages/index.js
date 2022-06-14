@@ -1,4 +1,3 @@
-import React from "react";
 import MeetupList from "../components/meetups/MeetupList";
 
 import { connectDataBase, getAllDocument } from "../helper/api-util";
