@@ -20,14 +20,24 @@ const HomePage = (props) => {
 };
 
 // static generation
-export const getStaticProps = async () => {
+// export const getStaticProps = async () => {
+//   const client = await connectDataBase();
+
+//   const sorting = { _id: -1 };
+//   const document = await getAllDocument(client, sorting);
+//   client.close();
+
+//   return { props: { meetups: document }, revalidate: 1 };
+// };
+
+export const getServerSideProps = async () => {
   const client = await connectDataBase();
 
   const sorting = { _id: -1 };
   const document = await getAllDocument(client, sorting);
   client.close();
 
-  return { props: { meetups: document }, revalidate: 1 };
+  return { props: { meetups: document } };
 };
 
 export default HomePage;
