@@ -27,7 +27,7 @@ export const getStaticProps = async () => {
   const document = await getAllDocument(client, sorting);
   client.close();
 
-  return { props: { meetups: document } };
+  return { props: { meetups: document }, revalidate: 1 };
 };
 
 export default HomePage;

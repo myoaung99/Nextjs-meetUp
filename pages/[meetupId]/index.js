@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 import {
   getAllDocument,
@@ -9,12 +10,19 @@ import {
 const MeetUpDetail = (props) => {
   const { meetup } = props;
   return (
-    <MeetupDetail
-      image={meetup.image}
-      title={meetup.title}
-      address={meetup.address}
-      description={meetup.description}
-    />
+    <>
+      <Head>
+        <title>{meetup.title}</title>
+        <meta name="description" content={meetup.description} />
+      </Head>
+
+      <MeetupDetail
+        image={meetup.image}
+        title={meetup.title}
+        address={meetup.address}
+        description={meetup.description}
+      />
+    </>
   );
 };
 
