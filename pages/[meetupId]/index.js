@@ -22,8 +22,6 @@ export const getStaticPaths = async () => {
   const client = await connectDataBase();
   const allMeetUps = await getAllDocument(client);
 
-  console.log(allMeetUps);
-
   const paths = allMeetUps.map((meetup) => {
     return {
       params: {
@@ -43,10 +41,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   const { meetupId } = context.params;
   const client = await connectDataBase();
-
-  const allMeetUps = await getAllDocument(client);
-
-  const meetup = await getSelectedMeetUp(allMeetUps, meetupId);
+  const meetup = await getSelectedMeetUp(client, meetupId);
 
   client.close();
 
