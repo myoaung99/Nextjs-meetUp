@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import NewMeetUpForm from "./../../components/meetups/NewMeetupForm";
 import "react-toastify/dist/ReactToastify.css";
 import NotificationContext from "../../store/noti-context";
+import Head from "next/head";
 
 const NewMeetUpPage = () => {
   const notiCtx = useContext(NotificationContext);
@@ -45,7 +46,11 @@ const NewMeetUpPage = () => {
 
   return (
     <>
-      {/* <ToastContainer /> */}
+      <Head>
+        <title>Add New MeetUp</title>
+        <meta name="description" content="Creat a new meetup for all people" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
 
       <NewMeetUpForm onAddMeetup={addMeetUpHandler} />
     </>

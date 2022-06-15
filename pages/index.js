@@ -1,3 +1,4 @@
+import Head from "next/head";
 import MeetupList from "../components/meetups/MeetupList";
 
 import { connectDataBase, getAllDocument } from "../helper/api-util";
@@ -5,6 +6,14 @@ import { connectDataBase, getAllDocument } from "../helper/api-util";
 const HomePage = (props) => {
   return (
     <>
+      <Head>
+        <title>NextJs MeetUps</title>
+        <meta
+          name="description"
+          content="Find the socializing meetups in one place."
+        />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <MeetupList meetups={props.meetups} />
     </>
   );

@@ -36,7 +36,7 @@ export const NotificationProvider = (props) => {
   const context = {
     notification: activeNotification,
     showNotification: showNotificationHandler,
-    hideNotificationHandler: hideNotificationHandler,
+    hideNotification: hideNotificationHandler,
   };
 
   return (
